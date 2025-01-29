@@ -80,7 +80,7 @@ preshed==3.0.8
     #   thinc
 psutil==5.9.4
     # via -r requirements.in
-pydantic==1.10.2
+pydantic==1.10.18
     # via
     #   spacy
     #   thinc
