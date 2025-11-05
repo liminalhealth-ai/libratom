@@ -39,7 +39,7 @@ enlighten==1.11.1
     # via -r requirements.in
 future==0.18.2
     # via treelib
-greenlet==2.0.1
+greenlet>=3.0.3,<4
     # via sqlalchemy
 humanfriendly==10.0
     # via -r requirements.in
