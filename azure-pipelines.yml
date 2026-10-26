@@ -1,0 +1,38 @@
+# lh-libratom CI on Azure DevOps (ClearPath, ADR-0081). This fork is published to the Azure
+# Artifacts feed cp-python as lh-libratom, so it does not clash with the public libratom on
+# PyPI; the import name stays libratom. nsa-common's email-parsing extra depends on it by name,
+# because Azure Artifacts rejects packages with git URL dependencies.
+#
+# Pull requests: build only. Tags lh-<upstream version>.<fork revision>, e.g. lh-0.7.1.1
+# (upstream 0.7.1, first fork revision): build and publish version 0.7.1.1. The version comes
+# from the tag (PBR_VERSION), because pbr ignores tags with a prefix.
+
+trigger:
+  branches:
+    exclude:
+      - "*"
+  tags:
+    include:
+      - lh-*
+
+pr:
+  branches:
+    include:
+      - pydantic-1-10-18
+      - main
+
+resources:
+  repositories:
+    - repository: platform
+      type: github
+      name: liminalhealth-ai/clearpath-azure-architecture
+      endpoint: github.com_liminalhealth-ai
+      ref: refs/heads/master
+
+extends:
+  template: pipelines/templates/python-library.yml@platform
+  parameters:
+    packageName: lh_libratom
+    publishTagPrefix: lh-
+    versionFromTag: true
+    fetchDepth: 0 # pbr reads git history for development versions on pull requests
