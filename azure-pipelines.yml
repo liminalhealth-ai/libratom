@@ -18,8 +18,7 @@ trigger:
 pr:
   branches:
     include:
-      - pydantic-1-10-18
-      - main
+      - pydantic-1-10-18-azure-pipelines # the release branch; pydantic-1-10-18 stays as AWS uses it
 
 resources:
   repositories:
